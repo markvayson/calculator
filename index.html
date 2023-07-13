@@ -6,7 +6,142 @@
     <title>Calculator</title>
     <link href="/dist/output.css" rel="stylesheet" />
     <link rel="icon" href="src/img/calculator.png" type="image/x-icon" />
-    <script type="text/javascript" src="src/index.js"></script>
   </head>
-  <body></body>
+  <body class="flex flex-col justify-center items-center">
+    <header class="">
+      <div id="logo" class="text-5xl">Calculator</div>
+    </header>
+    <main class="flex-1 w-full flex justify-center items-center">
+      <div id="calc" class="rounded-3xl shadow-lg w-5/6 flex flex-col h-5/6">
+        <div
+          id="text"
+          class="h-1/4 rounded-t-3xl bg-gray-800 flex flex-col p-5"
+        >
+          <div id="history" class="text-left text-gray-300 text-2xl">=</div>
+
+          <input
+            id="numText"
+            type="number"
+            value="0"
+            class="text-right flex-1 bg-gray-800 text-white placeholder:text-white text-8xl"
+          />
+        </div>
+        <div
+          id="buttons"
+          class="text-3xl font-bold h-full bg-gray-50 rounded-b-3xl flex-1 flex flex-col"
+        >
+          <div id="numbers" class="flex-1 grid grid-cols-4">
+            <button
+              onclick="operation('+')"
+              class="border-gray-400 bg-gray-200 border"
+            >
+              +
+            </button>
+            <button
+              onclick="operation('-')"
+              class="border-gray-400 bg-gray-200 border"
+            >
+              -
+            </button>
+            <button
+              onclick="operation('*')"
+              class="border-gray-400 bg-gray-200 border"
+            >
+              x
+            </button>
+            <button
+              onclick="operation('/')"
+              class="border-gray-400 bg-gray-200 border"
+            >
+              /
+            </button>
+            <button
+              onclick="handleNumClick(7)"
+              class="border number border-gray-400"
+            >
+              7
+            </button>
+            <button
+              onclick="handleNumClick(8)"
+              class="border number border-gray-400"
+            >
+              8
+            </button>
+            <button
+              onclick="handleNumClick(9)"
+              class="border number border-gray-400"
+            >
+              9
+            </button>
+            <button
+              onclick="operate('=')"
+              class="row-span-4 border border-gray-400 rounded-br-3xl bg-red-600"
+            >
+              =
+            </button>
+            <button
+              onclick="handleNumClick(4)"
+              class="border number border-gray-400"
+            >
+              4
+            </button>
+            <button
+              onclick="handleNumClick(5)"
+              class="border number border-gray-400"
+            >
+              5
+            </button>
+            <button
+              onclick="handleNumClick(6)"
+              class="border number border-gray-400"
+            >
+              6
+            </button>
+            <button
+              onclick="handleNumClick(1)"
+              class="border number border-gray-400"
+            >
+              1
+            </button>
+            <button
+              onclick="handleNumClick(2)"
+              class="border number border-gray-400"
+            >
+              2
+            </button>
+            <button
+              onclick="handleNumClick(3)"
+              class="border number border-gray-400"
+            >
+              3
+            </button>
+            <button
+              onclick="handleNumClick(0)"
+              class="border number border-gray-400 rounded-bl-3xl"
+            >
+              0
+            </button>
+            <button
+              id="period"
+              onclick="handleNumClick('.')"
+              class="border border-gray-400"
+            >
+              .
+            </button>
+            <button id="ac" class="border border-gray-400">AC</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer
+      class="p-2 gap-4 flex justify-center items-center absolute bottom-0 w-full text-center"
+    >
+      <span> © 2023 |</span>
+      <a href="https://github.com/markvayson"
+        ><span class="pr-1 font-bold">mark vayson</span>
+        <img src="src/img/github.svg" alt="github" class="w-5 h-5 inline" />
+      </a>
+    </footer>
+    <script type="text/javascript" src="src/index.js"></script>
+  </body>
 </html>
