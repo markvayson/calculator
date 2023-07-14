@@ -1,5 +1,6 @@
-# Calculator Project
+# Calculator
 
+[Live Demo](https://markvayson.github.io/Calculator/)
 This is a calculator project based on The Odin Project's curriculum. It is a basic calculator implementation using HTML, TailwindCSS, and JavaScript.
 
 ## Project Description
@@ -27,7 +28,7 @@ The calculator project aims to build a simple calculator with common arithmetic 
 
 ## Usage
 
-1. Clone the repository: [click] `git clone https://github.com/markvayson/Calculator.git`
+1. Clone the repository: [click](git clone https://github.com/markvayson/Calculator.git)
 2. npm run dev in terminal.
 3. Use the buttons or number key to input numbers and perform calculations.
 4. Press the "=" button or press 'Enter' to display the calculated result.
@@ -43,4 +44,4 @@ This project is licensed under the [MIT License](LICENSE). Feel free to modify a
 
 ## Acknowledgements
 
-- This project is based on the curriculum of The Odin Project (https://www.theodinproject.com/) and was implemented for learning purposes.
+- This project is based on the curriculum of [The Odin Project](https://www.theodinproject.com/) and was implemented for learning purposes.
