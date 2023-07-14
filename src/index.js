@@ -1,97 +1,184 @@
-let num = [];
-let x = null;
-let y = null;
-let operator = null;
-let ans = null;
+let DIGIT_OBJECT = [];
+let FIRST_NUMBER = null;
+let SECOND_NUMBER = null;
+let OPERATOR = "";
+let TOTAL = null;
+let PREVIOUS = [];
+let prevInfo = false;
+
 const numText = document.getElementById("numText");
 const numBtns = document.querySelectorAll(".number");
-x;
-const hist = document.getElementById("history");
+const history = document.getElementById("history");
+const prev = document.getElementById("prev");
 const ac = document.getElementById("ac");
-
+const pre = document.getElementById("pre");
 ac.addEventListener("click", clear);
 
-function handleNumClick(number) {
-  let n = number;
-  let period = ".";
-  if (n === "0" && num.length < 1) {
-    return (numText.value = 0);
+window.addEventListener("keydown", (e) => {
+  let key = e.key;
+  const allowedKeys = /[0-9+\-*/]/;
+  const ONLY_NUMBER = /[0-9]/;
+  const ONLY_SIGN = /[+\-*/]/;
+  if (key === "c") {
+    return clear();
   }
-  if (n === period && !num.includes(period)) {
-    num.push(n);
-  } else if (n !== period) {
-    num.push(n);
+  if (key === "Enter") {
+    return equal();
   }
-  if (operator === null) {
-    x = num.join("");
-    if (x[x.length - 1] !== period) {
-      numText.value = x;
-    }
-    hist.textContent = `= ${x}`;
-    ac.textContent = "C";
-  } else {
-    y = num.join("");
-    if (y[y.length - 1] !== period) {
-      numText.value = y;
-      ac.textContent = "C";
-    }
-    hist.textContent = `= ${x} ${operator} ${y}`;
+  if (key === ".") {
+    return period(".");
+  }
+  if (key === "Backspace") {
+    DIGIT_OBJECT.pop();
+    let Number = DIGIT_OBJECT.join("");
+    return (numText.textContent = Number);
+  }
+  if (!allowedKeys.test(key)) {
+    return e.preventDefault();
+  }
+  if (ONLY_NUMBER.test(key)) {
+    return handleNumClick(key);
+  }
+  if (ONLY_SIGN.test(key)) {
+    return operation(key);
+  }
+});
+function equal() {
+  console.log(PREVIOUS);
+  if (FIRST_NUMBER !== null && OPERATOR !== null && SECOND_NUMBER !== null) {
+    operate();
+    DIGIT_OBJECT = [];
+    SECOND_NUMBER = null;
+    OPERATOR = "";
   }
 }
-function operate(e) {
-  if (operator !== null) {
-    switch (operator) {
-      case "+":
-        x = parseFloat(x) + parseFloat(y);
-        hist.textContent = `= ${x} ${operator}`;
-        break;
-      case "-":
-        x = parseFloat(x) - parseFloat(y);
-        hist.textContent = `= ${x} ${operator}`;
-        break;
-      case "*":
-        x = parseFloat(x) * parseFloat(y);
-        hist.textContent = `= ${x} ${operator}`;
-        break;
-      case "/":
-        x = parseFloat(x) / parseFloat(y);
-        hist.textContent = `= ${x} ${operator}`;
-        break;
-    }
+function period(e) {
+  if (FIRST_NUMBER === null && e === ".") return;
+  if (e === "." && DIGIT_OBJECT.indexOf(".") !== -1) return;
+  DIGIT_OBJECT.push(e);
+}
+function handleNumClick(number) {
+  prevInfo = false;
+  showDiv();
+  if (TOTAL !== null) {
+    FIRST_NUMBER = TOTAL;
+    TOTAL = null;
+    SECOND_NUMBER = null;
+    history.textContent = `= ${FIRST_NUMBER} ${OPERATOR}`;
   }
-  if (e === "=") {
-    hist.textContent = `= ${x}`;
-    operator = null;
+  let n = number;
+  if (DIGIT_OBJECT[0] === 0 && n === 0) {
+    return;
   }
-  y = null;
-  num = [];
-  numText.value = x;
-  x;
+  if (DIGIT_OBJECT.length < 12) {
+    DIGIT_OBJECT.push(n);
+  }
+  let NUMBER = DIGIT_OBJECT.join("");
+  if (OPERATOR === "") {
+    FIRST_NUMBER = NUMBER;
+  } else {
+    SECOND_NUMBER = NUMBER;
+  }
+  numText.textContent = NUMBER;
+  ac.textContent = "C";
+}
+function operation(e) {
+  if (TOTAL !== null) {
+    FIRST_NUMBER = TOTAL;
+    TOTAL = null;
+    OPERATOR = e;
+    SECOND_NUMBER = null;
+    return (history.textContent = `= ${FIRST_NUMBER} ${OPERATOR}`);
+  }
+  prevInfo = false;
+  showDiv();
+  if (OPERATOR !== "" && SECOND_NUMBER !== null) {
+    operate();
+    history.textContent = `= ${FIRST_NUMBER} ${OPERATOR} ${SECOND_NUMBER}`;
+  }
+  if (FIRST_NUMBER !== null) {
+    OPERATOR = e;
+  }
+  if (FIRST_NUMBER !== null && SECOND_NUMBER === null) {
+    history.textContent = `= ${FIRST_NUMBER} ${OPERATOR}`;
+  }
+  DIGIT_OBJECT = [];
+}
+
+function operate() {
+  let op;
+  switch (OPERATOR) {
+    case "+":
+      op = "+";
+      TOTAL = Number(FIRST_NUMBER) + Number(SECOND_NUMBER);
+
+      break;
+    case "-":
+      op = "-";
+      TOTAL = Number(FIRST_NUMBER) - Number(SECOND_NUMBER);
+
+      break;
+    case "*":
+      op = "x";
+      TOTAL = Number(FIRST_NUMBER) * Number(SECOND_NUMBER);
+
+      break;
+    case "/":
+      if (SECOND_NUMBER === 0) {
+        clear();
+        history.textContent = "ERROR";
+        PREVIOUS.push(`ERROR`);
+        break;
+      }
+      op = "÷";
+      TOTAL = FIRST_NUMBER / SECOND_NUMBER;
+      break;
+  }
+  console.log(PREVIOUS);
+  if (PREVIOUS.length > 0) {
+    pre.classList.remove("opacity-0");
+  }
+  TOTAL = parseFloat(TOTAL.toFixed(2));
+  addText(op);
+}
+function addText(e) {
+  PREVIOUS.push(`${FIRST_NUMBER} ${e} ${SECOND_NUMBER} =  <b>${TOTAL}</b>`);
+  numText.textContent = TOTAL;
 }
 
 function clear() {
-  if (ac.textContent !== "C") {
-    x = null;
-    y = null;
-    operator = null;
+  if (ac.textContent === "C") {
+    DIGIT_OBJECT = [];
+    numText.textContent = 0;
+    ac.textContent = "AC";
+    return;
   }
-  numText.value = 0;
-  if (operator !== null) {
-    hist.textContent = `= ${x} ${operator}`;
-  } else {
-    hist.textContent = "=";
-  }
-  num = [];
-  ac.textContent = "AC";
-}
 
-function operation(e) {
-  if (x === null) return;
-  console.log(e);
-  if (y !== null) {
-    operate(e);
+  DIGIT_OBJECT = [];
+  FIRST_NUMBER = null;
+  SECOND_NUMBER = null;
+  OPERATOR = "";
+  history.textContent = "=";
+  TOTAL = null;
+}
+function showDiv() {
+  if (prevInfo === true) {
+    prev.classList.remove("opacity-0");
   }
-  operator = e;
-  hist.textContent = `= ${x} ${operator}`;
-  num = [];
+  if (prevInfo === false) {
+    prev.classList.add("opacity-0");
+  }
+}
+function Prev() {
+  if (PREVIOUS.length === 0) return;
+  prevInfo = !prevInfo;
+  showDiv();
+  while (prev.firstChild) {
+    prev.removeChild(prev.firstChild);
+  }
+  for (let i = PREVIOUS.length - 1; i >= 0; i--) {
+    const span = document.createElement("span");
+    span.innerHTML = `${PREVIOUS[i]} [${i + 1}]`;
+    prev.appendChild(span);
+  }
 }

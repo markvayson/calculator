@@ -9,26 +9,48 @@
   </head>
   <body class="flex flex-col justify-center items-center">
     <header class="">
-      <div id="logo" class="text-5xl">Calculator</div>
+      <div id="logo" class="text-5xl font-mono font-bold pt-5">
+        0123Calculator+-x÷
+      </div>
     </header>
     <main class="flex-1 w-full flex justify-center items-center">
-      <div id="calc" class="rounded-3xl shadow-lg w-5/6 flex flex-col h-5/6">
+      <div
+        id="calc"
+        class="relative rounded-3xl shadow-lg w-5/6 flex flex-col h-5/6"
+      >
         <div
           id="text"
-          class="h-1/4 rounded-t-3xl bg-gray-800 flex flex-col p-5"
+          class="h-1/4 rounded-t-3xl bg-gray-800 flex flex-col p-3"
         >
-          <div id="history" class="text-left text-gray-300 text-2xl">=</div>
+          <div class="flex">
+            <div
+              id="history"
+              class="text-left flex-1 text-gray-300 text-2xl xl:text-3xl"
+            >
+              =
+            </div>
+            <button
+              id="pre"
+              type="button"
+              class="text-2xl xl:text-3xl opacity-0 transition-opacity duration-300 text-gray-400 z-30"
+              onclick="Prev()"
+            >
+              Previous
+            </button>
+            <div
+              id="prev"
+              class="bg-white transition-opacity duration-300 opacity-0 flex touch-none text-right overflow-auto shadow-md flex-col gap-4 xl:gap-6 h-fit max-h-[66%] rounded-3xl absolute right-0 top-14 p-5 text-3xl xl:text-5xl"
+            ></div>
+          </div>
 
-          <input
+          <div
             id="numText"
-            type="number"
-            value="0"
-            class="text-right flex-1 bg-gray-800 text-white placeholder:text-white text-8xl"
-          />
+            class="text-right flex-1 w-full h-full overflow-auto break-words whitespace-normal bg-gray-800 text-white placeholder:text-white text-7xl xl:text-9xl"
+          ></div>
         </div>
         <div
           id="buttons"
-          class="text-3xl font-bold h-full bg-gray-50 rounded-b-3xl flex-1 flex flex-col"
+          class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl lg:font-normal h-3/4 font-bold bg-gray-50 rounded-b-3xl flex-1 flex flex-col"
         >
           <div id="numbers" class="flex-1 grid grid-cols-4">
             <button
@@ -53,7 +75,7 @@
               onclick="operation('/')"
               class="border-gray-400 bg-gray-200 border"
             >
-              /
+              ÷
             </button>
             <button
               onclick="handleNumClick(7)"
@@ -74,7 +96,7 @@
               9
             </button>
             <button
-              onclick="operate('=')"
+              onclick="equal()"
               class="row-span-4 border border-gray-400 rounded-br-3xl bg-red-600"
             >
               =
@@ -121,11 +143,7 @@
             >
               0
             </button>
-            <button
-              id="period"
-              onclick="handleNumClick('.')"
-              class="border border-gray-400"
-            >
+            <button onclick="period('.')" class="border border-gray-400">
               .
             </button>
             <button id="ac" class="border border-gray-400">AC</button>
@@ -134,7 +152,7 @@
       </div>
     </main>
     <footer
-      class="p-2 gap-4 flex justify-center items-center absolute bottom-0 w-full text-center"
+      class="p-2 gap-4 flex text-xl md:text-2xl lg:text-2xl xl:text-3xl justify-center items-center absolute bottom-0 w-full text-center"
     >
       <span> © 2023 |</span>
       <a href="https://github.com/markvayson"
