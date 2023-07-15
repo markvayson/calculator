@@ -8,51 +8,78 @@
     <link href="src/input.css" rel="stylesheet" />
     <link rel="icon" href="src/img/calculator.png" type="image/x-icon" />
   </head>
-  <body class="flex flex-col bg-gray-800 justify-center items-center">
-    <header class="">
-      <div id="logo" class="text-5xl font-mono text-gray-200 font-bold pt-5">
-        <span> Calc[0123]ula(+-x÷)tor</span>
+  <body
+    class="flex p-5 relative flex-col bg-gray-900 justify-center items-center"
+  >
+    <header class="w-full p-5 z-30 flex">
+      <div
+        id="logo"
+        class="text-4xl h-fit text-left flex-1 font-mono text-gray-200 font-bold"
+      >
+        <span> Calc[0123]ula(+-×÷)tor</span>
+      </div>
+      <div id="menu" onclick="menuItems()" class="text-gray-50 text-4xl"></div>
+      <div
+        id="menu-items"
+        class="absolute pointer-events-none opacity-0 transition-opacity duration-300 text-gray-50 flex text-2xl gap-4 flex-col h-fit w-fit top-20 right-0 text-right p-5 rounded-xl bg-gray-600"
+      >
+        <button
+          id="pre"
+          type="button"
+          class="text-right xl:text-3xl line-through transition-all duration-300 text-gray-50"
+          onclick="Prev()"
+        >
+          History
+        </button>
+        <a href="https://github.com/markvayson" target="_blank">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="1em"
+            viewBox="0 0 496 512"
+            class="fill-gray-200 inline"
+          >
+            <path
+              d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"
+            />
+          </svg>
+          <span class="pr-1">Github</span>
+        </a>
+        <span> © 2023 | mark vayson</span>
       </div>
     </header>
     <main class="flex-1 w-full flex justify-center items-center">
       <div
         id="calc"
-        class="relative bg-gray-900 rounded-3xl shadow-lg w-5/6 xl:w-9/12 flex flex-col h-5/6"
+        class="relative bg-gray-900 shadow-lg w-full h-full xl:w-9/12 flex flex-col"
       >
-        <div id="text" class="h-1/3 rounded-t-3xl p-5 flex flex-col">
-          <div class="flex">
-            <button
-              id="pre"
-              type="button"
-              class="text-2xl opacity-0 text-center absolute -top-10 xl:text-3xl transition-all duration-300 text-gray-800 z-30"
-              onclick="Prev()"
-            >
-              (+) History
-            </button>
-            <div
-              id="prev"
-              class="bg-gray-900 opacity-0 text-gray-200 transition-opacity duration-300 flex touch-none pointer-events-none text-left overflow-auto shadow-md flex-col gap-4 xl:gap-6 w-full h-fit max-h-[100%] rounded-3xl absolute left-0 top-0 p-5 text-3xl xl:text-5xl"
-            ></div>
-            <div
-              id="history"
-              class="text-right flex-1 text-gray-300 text-2xl xl:text-3xl"
-            >
-              :)
-            </div>
-          </div>
+        <div
+          id="text"
+          class="h-1/4 relative justify-end items-end text-end p-5 flex flex-col"
+        >
+          <div
+            id="prev"
+            class="bg-gray-900 opacity-0 text-gray-200 transition-opacity duration-300 flex touch-none pointer-events-none text-left overflow-auto shadow-md flex-col gap-4 xl:gap-6 w-full h-fit max-h-[100%] rounded-3xl absolute left-0 p-5 text-3xl xl:text-5xl z-30"
+          ></div>
+          <div
+            id="history"
+            class="text-left w-full text-gray-300 text-3xl xl:text-3xl"
+          ></div>
 
           <div
             id="numText"
-            class="text-right pointer-events-none flex-1 w-full h-full overflow-auto break-words whitespace-normal text-white placeholder:text-white text-7xl xl:text-9xl"
+            class="overflow-hidden pointer-events-none relative flex-1 w-full"
           >
-            type or click a number
+            <p
+              id="pText"
+              class="absolute whitespace-nowrap bottom-5 right-0 text-white text-8xl"
+            ></p>
           </div>
         </div>
         <div
           id="buttons"
           class="text-3xl py-2 transition-all md:text-4xl lg:text-5xl xl:text-6xl lg:font-normal h-2/3 font-bold rounded-b-3xl flex-1 flex flex-col"
         >
-          <div id="numbers" class="flex-1 px-2 gap-2 grid grid-cols-4">
+          <div id="numbers" class="flex-1 px-2 gap-5 grid grid-cols-4">
             <button
               id="+"
               onclick="operation('+')"
@@ -69,14 +96,14 @@
             </button>
             <button
               id="*"
-              onclick="operation('*')"
+              onclick="operation('×')"
               class="rounded-full transition-all duration-300 bg-yellow-400 text-gray-100 border-yellow-600 border"
             >
               ×
             </button>
             <button
-              id="/"
-              onclick="operation('/')"
+              id="÷"
+              onclick="operation('÷')"
               class="rounded-full transition-all duration-300 bg-yellow-400 text-gray-100 border-yellow-600 border"
             >
               ÷
@@ -175,25 +202,6 @@
         </div>
       </div>
     </main>
-    <footer
-      class="p-2 gap-4 flex text-xl text-gray-200 md:text-2xl lg:text-2xl xl:text-3xl justify-center items-center absolute bottom-0 w-full text-center"
-    >
-      <span> © 2023 |</span>
-      <a href="https://github.com/markvayson" target="_blank"
-        ><span class="pr-1 font-bold">mark vayson</span>
-
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="1em"
-          viewBox="0 0 496 512"
-          class="fill-gray-200 inline"
-        >
-          <path
-            d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"
-          />
-        </svg>
-      </a>
-    </footer>
     <script type="text/javascript" src="src/index.js"></script>
   </body>
 </html>
