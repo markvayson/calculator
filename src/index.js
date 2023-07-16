@@ -223,6 +223,7 @@ function addText() {
 
   if (pText.textContent !== "ERROR") {
     pText.textContent = format;
+    history.textContent = `${FIRST_NUMBER} ${OPERATOR} ${SECOND_NUMBER}`;
   }
 }
 
@@ -276,7 +277,21 @@ function Prev() {
   prev.appendChild(computations);
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const logo = document.getElementById("logo");
+  logo.style.color = "rgb(229 231 235 / var(--tw-text-opacity))";
+  logo.style.position = "absolute";
+  logo.style.height = "100%";
+  logo.style.width = "100%";
+  logo.style.justifyContent = "center";
+  logo.style.backgroundColor = "rgb(31 41 55 / var(--tw-bg-opacity)";
+});
+
 window.onload = () => {
+  const logo = document.getElementById("logo");
+  logo.style.height = "5%";
+  logo.style.backgroundColor = "transparent";
+
   showMenu();
   history.textContent = "0";
   pText.textContent = "Type or Click";

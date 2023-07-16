@@ -8,15 +8,17 @@
     <link href="src/input.css" rel="stylesheet" />
     <link rel="icon" href="src/img/calculator.png" type="image/x-icon" />
   </head>
-  <body
-    class="flex p-5 relative flex-col bg-gray-900 justify-center items-center"
-  >
+  <body class="flex relative flex-col bg-gray-900 justify-center items-center">
     <header class="w-full p-2 z-30 flex">
       <div
-        id="logo"
         class="text-xl h-fit text-left flex-1 font-mono text-gray-200 font-bold"
       >
-        <span> Calc[0123]ula(+-×÷)tor</span>
+        <span
+          id="logo"
+          class="transition-all duration-300 flex items-center bg-gray-800 h-fit"
+        >
+          Calc[0123]ula(+-×÷)tor</span
+        >
       </div>
       <div>
         <div
@@ -64,7 +66,7 @@
         >
           <div
             id="prev"
-            class="bg-gray-900 opacity-0 text-gray-200 transition-opacity duration-300 flex pointer-events-none text-left overflow-auto shadow-md flex-col gap-4 xl:gap-6 w-full h-fit max-h-[100%] rounded-3xl absolute left-0 p-5 text-lg xl:text-5xl z-30"
+            class="bg-gray-800 opacity-0 text-gray-200 transition-opacity duration-300 flex pointer-events-none text-left overflow-auto shadow-md flex-col gap-4 xl:gap-6 w-full h-fit max-h-[100%] rounded-3xl absolute left-0 p-5 text-lg xl:text-5xl z-30"
           ></div>
           <div
             id="history"
